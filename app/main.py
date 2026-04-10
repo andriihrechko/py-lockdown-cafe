@@ -1,1 +1,4 @@
-# write your code here
+import datetime
+
+from exceptions import (NotVaccinatedError, NotWearingMaskError,
+                        OutdatedVaccineError)
