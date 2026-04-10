@@ -18,3 +18,21 @@ class Cafe:
         if "wearing_a_mask" in visitor and not visitor["wearing_a_mask"]:
             raise NotWearingMaskError
         return f"Welcome to {self.name}"
+
+
+def go_to_cafe(friends: list, cafe: Cafe) -> str:
+    masks_to_buy = 0
+    try:
+        for friend in friends:
+            try:
+                cafe.visit_cafe(friend)
+            except (NotVaccinatedError, OutdatedVaccineError):
+                raise
+            except NotWearingMaskError:
+                masks_to_buy += 1
+    except (NotVaccinatedError, OutdatedVaccineError):
+        return "All friends should be vaccinated"
+    else:
+        if masks_to_buy:
+            return f"Friends should buy {masks_to_buy} masks"
+        return f"Friends can go to {cafe.name}"
